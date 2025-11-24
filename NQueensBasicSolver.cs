@@ -1,10 +1,7 @@
 namespace QueensPuzzleExample
 {
-    public class NQueensSolver
+    public class NQueensBasicSolver
     {
-        private const char QueenChar = 'Q';
-        private const char EmptyChar = '.';
-
         public static IList<IList<string>> SolveNQueens(int n)
         {
             var solutions = new List<IList<string>>();
@@ -12,7 +9,7 @@ namespace QueensPuzzleExample
             for (int i = 0; i < n; i++)
             {
                 board[i] = new char[n];
-                Array.Fill(board[i], EmptyChar);
+                Array.Fill(board[i], BoardConstants.EmptyChar);
             }
 
             Backtrack(0, board, solutions, n);
@@ -31,9 +28,9 @@ namespace QueensPuzzleExample
             {
                 if (IsValid(row, col, board, n))
                 {
-                    board[row][col] = QueenChar;
+                    board[row][col] = BoardConstants.QueenChar;
                     Backtrack(row + 1, board, solutions, n);
-                    board[row][col] = EmptyChar;
+                    board[row][col] = BoardConstants.EmptyChar;
                 }
             }
         }
@@ -45,13 +42,13 @@ namespace QueensPuzzleExample
                 int diff = row - i;
 
                 // Check column
-                if (board[i][col] == QueenChar) return false;
+                if (board[i][col] == BoardConstants.QueenChar) return false;
 
                 // Check upper left diagonal
-                if (col - diff >= 0 && board[i][col - diff] == QueenChar) return false;
+                if (col - diff >= 0 && board[i][col - diff] == BoardConstants.QueenChar) return false;
 
                 // Check upper right diagonal
-                if (col + diff < n && board[i][col + diff] == QueenChar) return false;
+                if (col + diff < n && board[i][col + diff] == BoardConstants.QueenChar) return false;
             }
 
             return true;
